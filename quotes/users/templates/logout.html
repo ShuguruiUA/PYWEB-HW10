@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container mt-3">
+        <h1>See you soon!</h1>
+        <p>You will be redirected in <span id="countdown">5</span> seconds...</p>
+    </div>
+
+    <meta http-equiv="refresh" content="5;url=/">
+    <script>
+        // Countdown function
+        function countdown() {
+            var seconds = 5;
+            var countdownElement = document.getElementById("countdown");
+
+            var interval = setInterval(function() {
+                seconds--;
+                countdownElement.innerText = seconds;
+
+                if (seconds <= 0) {
+                    clearInterval(interval);
+                }
+            }, 1000);
+        }
+
+        // Call countdown function when the page loads
+        window.onload = function() {
+            countdown();
+        };
+    </script>
+{% endblock %}
+І

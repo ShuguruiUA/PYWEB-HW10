@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="row">
+    <div class="col-md-8">
+            {% for quote in quotes %}
+                {% if tag in quote.tags.all %}
+                    <div class="quote" itemscope="">
+                        <span class="text" itemprop="text">
+                            {{quote.quote}}
+                        </span>
+                        <span>by <small class="author" itemprop="author">{{quote.author.fullname}}</small>
+                        <a href="/author/{{quote.author.id}}">(about)</a>
+                        </span>
+                        <div class="tags">
+                            Tags:
+                            {% for tag in quote.tags.all %}
+                            <a class="tag" href="{% url 'quotesapp:tag_info' tag_name=tag.name page=1 %}">{{tag.name}}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+            <nav>
+              <ul class="pager">
+
+                    <li class="previous">
+                        <a class="{% if not quotes.has_previous %} disabled {% endif %}"
+                           href="{% if quotes.has_previous %} {% url 'quotesapp:tag_info' tag_name=tag.name page=quotes.previous_page_number %}  {% else %} # {% endif %}">
+                            <span aria-hidden="true">←</span> Previous
+                        </a>
+                    </li>
+
+
+                    <li class="next">
+                        <a class="{% if not quotes.has_next %} disabled {% endif %}"
+                           href="{% if quotes.has_next %} {% url 'quotesapp:tag_info' tag_name=tag.name page=quotes.next_page_number %}  {% else %} # {% endif %}">
+                            Next <span aria-hidden="true">→</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+{% endblock %}
