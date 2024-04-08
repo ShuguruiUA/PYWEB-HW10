@@ -85,3 +85,13 @@ pager li {
 p {
     margin: 0 0 11px;
 }
+.tags-box {
+	text-align: right;
+}
+.col-md-4 {
+	width: 33.33333333%;
+}
+.tag-item {
+	display: block;
+	margin: 4px;
+}
